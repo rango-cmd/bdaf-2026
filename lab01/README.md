@@ -36,14 +36,13 @@ lab01/
 
 ## Setup Instructions
 
-Install Foundry (if not installed):
+Build the project an run it
 
-    curl -L https://foundry.paradigm.xyz | bash
-    foundryup
-
-Build the project:
-
+    git clone <your-repo>
+    cd lab01
+    forge install
     forge build
+    forge test
 
 ------------------------------------------------------------------------
 
