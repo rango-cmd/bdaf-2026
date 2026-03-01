@@ -27,9 +27,9 @@ It includes event logging, custom errors, and reentrancy protection.
 ```
 lab01/
 ├── src/
-│ └── EthVault.sol
+│    └── EthVault.sol
 ├── test/
-│ └── EthVault.t.sol
+│    └── EthVault.t.sol
 └── README.md
 ```
 ------------------------------------------------------------------------
