@@ -38,7 +38,7 @@ lab01/
 
 Build the project an run it
 
-    git clone [bdaf-2026](https://github.com/rango-cmd/bdaf-2026.git)
+    git clone https://github.com/rango-cmd/bdaf-2026.git
     cd lab01
     forge install
     forge build
