@@ -1,0 +1,10 @@
+# environment variables
+.env
+
+# Foundry build files
+out/
+cache/
+broadcast/
+
+# macOS
+.DS_Store
