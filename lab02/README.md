@@ -68,15 +68,15 @@ All tests should pass.
 
 ## Deployed Contracts (Zircuit Testnet)
 
-TokenA
+[TokenA](https://sourcify.dev/serverv2/verify/a73809fa-33ae-4e0c-b29c-ccc201489575)
 
     0xdf85d4a9dda592e4850662ad0490f225336f1b7d
 
-TokenB
+[TokenB](https://sourcify.dev/serverv2/verify/5e67d497-2780-4a13-8358-af15578eb4da)
 
     0xd40fa32cf9189e3633fb705530b2fca75ff3d467
 
-TokenTrade
+[TokenTrade](https://sourcify.dev/serverv2/verify/10e8fc4f-2d0c-4437-a70d-34a7428c1f0d)
 
     0xdb798099093e3f55255a1b11343f5691859cab50
 
