@@ -84,14 +84,14 @@ All tests should pass.
 
 ## Example Transactions
 
-Alice setup trade
+[Alice setup trade](https://explorer.garfield-testnet.zircuit.com/tx/0x160fdf2b80d8e83862379d879d68639015419299c1cf02aa0e057c51aea4ecf6)
 
     0x160fdf2b80d8e83862379d879d68639015419299c1cf02aa0e057c51aea4ecf6
 
-Bob settle trade
+[Bob settle trade](https://explorer.garfield-testnet.zircuit.com/tx/0x9c1bdd83f0d0ebfd211525c5942257f9f64023a900a28be453aa4525e456da47)
 
     0x9c1bdd83f0d0ebfd211525c5942257f9f64023a900a28be453aa4525e456da47
 
-Owner withdraw fee
+[Owner withdraw fee](https://explorer.garfield-testnet.zircuit.com/tx/0xa8bcb5ebaa01077b90c27b297f8c94a8660fb2f8ca6dbd86f4ac92b5a3313381)
 
     0xa8bcb5ebaa01077b90c27b297f8c94a8660fb2f8ca6dbd86f4ac92b5a3313381
