@@ -22,20 +22,33 @@ contract TokenGoldTest is Test {
     uint256 internal constant INITIAL_ALICE_BALANCE = 1_000 ether;
     uint256 internal constant PERMIT_VALUE = 100 ether;
 
+    /**
+     * @dev Setup runs before each test
+     * - Deploy contract
+     * - Create test accounts
+     * - Give Alice some tokens
+     */
     function setUp() public {
         token = new TokenGold();
 
         alice = vm.addr(alicePrivateKey);
         console.log('Alice Address:', alice);
+
         bob = vm.addr(bobPrivateKey);
         console.log('Bob Address:', bob);
+
         bad = vm.addr(badPrivateKey);
         console.log('Bad Address:', bad);
+
         // Give Alice some GLD tokens to use in permit / transferFrom tests.
         assertTrue(token.transfer(alice, INITIAL_ALICE_BALANCE));
         console.log('Alice Balance:', token.balanceOf(alice));
     }
 
+    /**
+     * @dev Helper: simulate off-chain signing
+     * Recreates the exact hash used in permit()
+     */
     function _signMessage(
         address owner,
         address spender,
@@ -44,6 +57,7 @@ contract TokenGoldTest is Test {
         uint256 deadline,
         uint256 privateKey
     ) internal view returns (bytes memory signature) {
+        // Step 1: recreate message hash (same as contract)
         bytes32 hash = keccak256(
             abi.encodePacked(
                 owner,
@@ -57,17 +71,21 @@ contract TokenGoldTest is Test {
         console.log("Hash:");
         console.logBytes32(hash);
         
+        // Step 2: convert to Ethereum signed message
         bytes32 message = hash.toEthSignedMessageHash();
         console.log("Message:");
         console.logBytes32(message);
-        
+
+        // Step 3: sign with private key
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(privateKey, message);
+
+        // Step 4: combine into signature
         signature = abi.encodePacked(r, s, v);
-        
         console.log("Signature:");
         console.logBytes(signature);
     }
 
+    /// Test: valid permit works
     function test_Permit_Valid() public {
         uint256 nonce = token.nonces(alice);
         console.log('Nonce[Alice]:', nonce);
@@ -94,6 +112,7 @@ contract TokenGoldTest is Test {
         assertEq(token.nonces(alice), nonce + 1);
     }
 
+    /// Test: invalid signer
     function test_Permit_InvalidSinger() public {
         uint256 nonce = token.nonces(alice);
         console.log('Nonce[Alice]:', nonce);
@@ -116,6 +135,7 @@ contract TokenGoldTest is Test {
         token.permit(alice, bob, PERMIT_VALUE, nonce, deadline, signature);
     }
 
+    /// Test: replay attack (same signature twice)
     function test_Permit_ReusingSignature() public {
         uint256 nonce = token.nonces(alice);
         console.log('Nonce[Alice]:', nonce);
@@ -133,14 +153,17 @@ contract TokenGoldTest is Test {
         );
 
         vm.startPrank(bob);
+        // First use → OK
         token.permit(alice, bob, PERMIT_VALUE, nonce, deadline, signature);
 
+        // Second use → should fail
         vm.expectRevert(TokenGold.InvalidNonce.selector);
         token.permit(alice, bob, PERMIT_VALUE, nonce, deadline, signature);
 
         vm.stopPrank();
     }
 
+    /// Test: expired signature
     function test_Permit_SignatureExpired() public {
         uint256 nonce = token.nonces(alice);
         console.log('Nonce[Alice]:', nonce);
@@ -165,6 +188,7 @@ contract TokenGoldTest is Test {
         token.permit(alice, bob, PERMIT_VALUE, nonce, deadline, signature);
     }
 
+    /// Test: transferFrom works after permit
     function test_TransferFrom_WorksAfterPermit() public {
         uint256 nonce = token.nonces(alice);
         console.log('Nonce[Alice]:', nonce);
@@ -197,6 +221,7 @@ contract TokenGoldTest is Test {
         assertEq(token.allowance(alice, bob), PERMIT_VALUE - transferFromAmount);
     }
 
+    /// Test: transferFrom without permit
     function test_TransferFrom_NoPermit() public {
         uint256 transferFromAmount = 50 ether;
 

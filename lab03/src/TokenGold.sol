@@ -11,6 +11,7 @@ contract TokenGold is ERC20 {
     
     uint256 public constant INITIAL_SUPPLY = 100_000_000 * 1e18;
 
+    /// Track nonce per user → prevents signature replay
     mapping (address=>uint256) public nonces;
 
     error InvalidNonce();
@@ -21,6 +22,7 @@ contract TokenGold is ERC20 {
         _mint(msg.sender, INITIAL_SUPPLY);
     }
 
+    /// @notice Approve tokens via signature (no gas required from owner)
     function permit(
         address owner,
         address spender,
@@ -29,13 +31,13 @@ contract TokenGold is ERC20 {
         uint256 deadline,
         bytes memory signature
     ) public {
-        /// nonce
+        /// Check nonce
         if (nonce != nonces[owner]) revert InvalidNonce();
         
-        /// deadline
+        /// Check deadline
         if (block.timestamp > deadline) revert SignatureExpired();
 
-        /// signature
+        /// Recreate signed message hash
         bytes32 hash = keccak256(
             abi.encodePacked(
                 owner,
@@ -46,12 +48,16 @@ contract TokenGold is ERC20 {
                 address(this)
             )
         );
+
+        /// Convert to Ethereum signed message format
+        /// Recover signer address from signature
         bytes32 message = hash.toEthSignedMessageHash();
         address signer = ECDSA.recover(message, signature);
 
+        /// Verify signature → must be signed by owner
         if (signer != owner) revert InvalidSignature();
 
-        /// execute
+        /// Execute approval & Increase nonce
         _approve(owner, spender, value);
         nonces[owner]++;
     }
