@@ -61,7 +61,7 @@ contract Challenge3 {
         if (token == tokenA) {
             IERC20(tokenB).approve(address(rebalancer), IERC20(tokenB).balanceOf(address(this)));
             rebalancer.swapBForA(IERC20(tokenB).balanceOf(address(this)));
-        } elseif (token == tokenB) {
+        } else if (token == tokenB) {
             IERC20(tokenA).approve(address(rebalancer), IERC20(tokenA).balanceOf(address(this)));
             rebalancer.swapAForB(IERC20(tokenA).balanceOf(address(this)));
         }

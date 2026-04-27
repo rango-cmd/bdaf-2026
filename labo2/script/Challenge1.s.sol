@@ -35,7 +35,7 @@ contract Challenge1Script is Script {
 
         // 2. Execute the attack
         // Using the 5000 tokenB flash loan
-        uint256 flashLoanAmount = 5_000e18;
+        uint256 flashLoanAmount = 5_000 * 1e18;
         exploit.attack(flashLoanAmount);
 
         // 3. Trigger the verification on the ChallengeFactory
