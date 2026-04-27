@@ -16,8 +16,6 @@ interface ISimpleDEX {
 
 // interface of contract VulnerableLiquidator.sol
 interface IVulnerableLiquidator {
-    function getPrice() external returns (uint256);
-    function openPosition(uint256 collateralAmount, uint256 borrowAmount) external;
     function isHealthy(address user) external returns (bool);
     function liquidate(address borrower) external;
 }
