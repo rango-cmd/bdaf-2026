@@ -1,9 +1,14 @@
 # TrustSeal
-Decentralized Criminal Address Intelligence Registry
 
-## Concept
-TrustSeal is a decentralized application (dApp) designed to bridge the gap between professional "on-chain analytics" and everyday user safety. Inspired by the "Whoscall" caller ID service, this project allows victims and law enforcement to tag malicious wallet addresses on-chain.
-It features a 3 trust System:
-1. User Reports: Crowdsourced flagging of suspicious activity.
-2. Law enforcement Verification: Official "Blue-Check" validation using SBT (Soulbound Tokens) held by verified investigators.
-3. DeFi Integration: An open interface for DEXs and Wallets to query risk scores before executing transactions.
+**Decentralized Criminal Address Intelligence Registry**
+
+**TrustSeal** is a decentralized application (dApp) that bridges the gap between professional on-chain analytics and everyday user safety. Much like a "[Whoscall](https://web.whoscall.com)" for crypto wallets, it allows the community and authorities to flag malicious actors in real-time.
+
+## Core Features
+- **Crowdsourced Reports**: Victims and users can report and tag suspicious wallet addresses directly on-chain.
+
+- **Official Verification**: Law enforcement and verified investigators use **Soulbound Tokens (SBT)** to provide "Blue-Check" validation for high-certainty threats.
+
+- **Behavioral Analysis**: Tracks and labels wallet patterns to identify potential scams or money laundering before they strike.
+
+- **DeFi Integration**: An open API/Interface that allows DEXs and Wallets to check risk scores and block transactions to flagged addresses.
