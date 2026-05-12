@@ -1,12 +1,24 @@
-# Behavioral Analysis
+# TRON Behavioral Analysis
 
-We have 
+## Project Goal
 
-## Address Lables Source
+To identify and categorize TRON addresses based on on-chain behavior. The system aims to:
 
+- Classify addresses (e.g., Exchange, Bot, Scam, Personal).
+- **Cluster related addresses** that share behavioral patterns, even in the absence of direct transaction links.
 
+## Data Sources (Labels)
 
-## Strategy (Analysis Vector)
-- **Lifetime**:
+Used for model training and validation:
 
-## Goal
+- Law Enforcement: Known illicit addresses and sanctioned entities.
+- Open Source: Publicly available labels from TRONSCAN, Arkham, and GitHub repositories.
+
+## Analysis Vectors (Features)
+
+We analyze the following dimensions to build a "behavioral fingerprint":
+
+- Lifetime: Duration between the first and most recent activity.
+- Token Velocity: Frequency and volume of TRC-20 transfers (specifically stable coin).
+- Transaction Profile:
+- Counterparty Graph: Analysis of the neighborhood (but how deep?)
