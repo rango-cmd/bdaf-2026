@@ -7,7 +7,7 @@ To identify and categorize TRON addresses based on on-chain behavior. The system
 - Classify addresses (e.g., Exchange, Bot, Scam, Personal).
 - **Cluster related addresses** that share behavioral patterns, even in the absence of direct transaction links.
 
-## Data Sources (Labels)
+## Data Sources
 
 Used for model training and validation:
 
