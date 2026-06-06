@@ -2,7 +2,7 @@
 pragma solidity ^0.8.33;
 
 import {Test} from "../lib/forge-std/src/Test.sol";
-import {stdJson} from "../lib/forge-std/src/stdJson.sol";
+import {stdJson} from "../lib/forge-std/src/StdJson.sol";
 import {console} from "../lib/forge-std/src/console.sol";
 import {MembershipBoard} from "../src/MembershipBoard.sol";
 
